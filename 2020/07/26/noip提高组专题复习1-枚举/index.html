@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flip Game poj-1753题意：给你一个4*4的黑白棋盘,每次可以将一个棋子反转颜色,同时这个棋子的上下左右都会反转,问你最少反转几次,可以将整个棋盘变成同色的无解输出Impossible题解：可以通过dfs暴力枚举得出答案；可以状态压缩，用二进制枚举，枚举出怎么翻的所有情况，求出答案 dfs代码 123456789101112131415161718192021222324252627">
+<meta property="og:type" content="article">
+<meta property="og:title" content="noip提高组专题复习1-枚举">
+<meta property="og:url" content="http://cgoatone.js.org/2020/07/26/noip%E6%8F%90%E9%AB%98%E7%BB%84%E4%B8%93%E9%A2%98%E5%A4%8D%E4%B9%A01-%E6%9E%9A%E4%B8%BE/index.html">
+<meta property="og:site_name" content="yangxiaqing&#39;s blog">
+<meta property="og:description" content="Flip Game poj-1753题意：给你一个4*4的黑白棋盘,每次可以将一个棋子反转颜色,同时这个棋子的上下左右都会反转,问你最少反转几次,可以将整个棋盘变成同色的无解输出Impossible题解：可以通过dfs暴力枚举得出答案；可以状态压缩，用二进制枚举，枚举出怎么翻的所有情况，求出答案 dfs代码 123456789101112131415161718192021222324252627">
+<meta property="article:published_time" content="2020-07-26T10:47:56.254Z">
+<meta property="article:modified_time" content="2020-07-26T10:47:56.457Z">
+<meta property="article:author" content="yangxiaqing">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":20,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cgoatone.js.org/2020/07/26/noip提高组专题复习1-枚举/"/>
+
+
+
+
+
+  <title>noip提高组专题复习1-枚举 | yangxiaqing's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yangxiaqing's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cgoatone.js.org/2020/07/26/noip%E6%8F%90%E9%AB%98%E7%BB%84%E4%B8%93%E9%A2%98%E5%A4%8D%E4%B9%A01-%E6%9E%9A%E4%B8%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yangxiaqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yangxiaqing's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">noip提高组专题复习1-枚举</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-26T18:47:56+08:00">
+                2020-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Flip-Game-poj-1753"><a href="#Flip-Game-poj-1753" class="headerlink" title="Flip Game poj-1753"></a>Flip Game <a href="http://poj.org/problem?id=1753" target="_blank" rel="noopener">poj-1753</a></h2><p>题意：给你一个4*4的黑白棋盘,每次可以将一个棋子反转颜色,同时这个棋子的上下左右都会反转,问你最少反转几次,可以将整个棋盘变成同色的无解输出Impossible<br>题解：可以通过dfs暴力枚举得出答案；可以状态压缩，用二进制枚举，枚举出怎么翻的所有情况，求出答案</p>
+<p>dfs代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路： </span><br><span class="line">暴力dfs</span><br><span class="line">每个格子最多翻一次 </span><br><span class="line">*&#x2F;</span><br><span class="line">char g[10][10];</span><br><span class="line">int tx[7]&#x3D;&#123;0,1,0,-1,0&#125;,ty[7]&#x3D;&#123;1,0,-1,0,0&#125;,ans&#x3D;200;</span><br><span class="line">void change(int x,int y) &#x2F;&#x2F;翻第x行y列的棋子以及上下左右的棋子 </span><br><span class="line">&#123;</span><br><span class="line">	int i; </span><br><span class="line">	for(i&#x3D;0;i&lt;5;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int newx&#x3D;x+tx[i],newy&#x3D;y+ty[i];</span><br><span class="line">		if(newx&gt;&#x3D;0 &amp;&amp; newx&lt;4 &amp;&amp; newy&gt;&#x3D;0 &amp;&amp; newy&lt;4)</span><br><span class="line">		&#123;</span><br><span class="line">			if(g[newx][newy]&#x3D;&#x3D;&#39;b&#39;)</span><br><span class="line">				g[newx][newy]&#x3D;&#39;w&#39;;</span><br><span class="line">			else</span><br><span class="line">				g[newx][newy]&#x3D;&#39;b&#39;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">bool check() &#x2F;&#x2F;检查是否全部同色</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	char f&#x3D;g[1][1];</span><br><span class="line">	for(i&#x3D;0;i&lt;4;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;0;j&lt;4;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(g[i][j]!&#x3D;f)</span><br><span class="line">				return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br><span class="line">void dfs(int step,int t) &#x2F;&#x2F;dfs枚举 </span><br><span class="line">&#123;</span><br><span class="line">	if(t&#x3D;&#x3D;16)</span><br><span class="line">	&#123;</span><br><span class="line">		if(check())</span><br><span class="line">			ans&#x3D;min(ans,step);</span><br><span class="line">		return ;</span><br><span class="line">	&#125;</span><br><span class="line">	int x&#x3D;t&#x2F;4,y&#x3D;t%4;</span><br><span class="line">	change(x,y);</span><br><span class="line">	dfs(step+1,t+1);</span><br><span class="line">	change(x,y);</span><br><span class="line">	dfs(step,t+1);</span><br><span class="line">	return ;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	for(i&#x3D;0;i&lt;4;i++)</span><br><span class="line">		cin&gt;&gt;g[i];</span><br><span class="line">	dfs(0,0);</span><br><span class="line">	if(ans&#x3D;&#x3D;200)</span><br><span class="line">		cout&lt;&lt;&quot;Impossible&quot;&lt;&lt;endl;</span><br><span class="line">	else</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二进制枚举代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路： </span><br><span class="line">用二进制位运算来状态压缩</span><br><span class="line">1表示翻，0表示不翻，所以翻不翻的所有情况都可以通过二进制枚举出来 </span><br><span class="line">0000&#x3D;0</span><br><span class="line">0001&#x3D;1</span><br><span class="line">0010&#x3D;2</span><br><span class="line">...</span><br><span class="line">1111&#x3D;15</span><br><span class="line"></span><br><span class="line">与运算 &amp;</span><br><span class="line">同为一才为一 </span><br><span class="line">*&#x2F;</span><br><span class="line">char g[10][10];</span><br><span class="line">int tx[7]&#x3D;&#123;0,1,0,-1,0&#125;,ty[7]&#x3D;&#123;1,0,-1,0,0&#125;,ans&#x3D;200;</span><br><span class="line">void change(int j) &#x2F;&#x2F;翻第j&#x2F;4行j%4列的棋子以及上下左右的棋子 </span><br><span class="line">&#123;</span><br><span class="line">	int i,x&#x3D;j&#x2F;4,y&#x3D;j%4; </span><br><span class="line">	for(i&#x3D;0;i&lt;5;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int newx&#x3D;x+tx[i],newy&#x3D;y+ty[i];</span><br><span class="line">		if(newx&gt;&#x3D;0 &amp;&amp; newx&lt;4 &amp;&amp; newy&gt;&#x3D;0 &amp;&amp; newy&lt;4)</span><br><span class="line">		&#123;</span><br><span class="line">			if(g[newx][newy]&#x3D;&#x3D;&#39;b&#39;)</span><br><span class="line">				g[newx][newy]&#x3D;&#39;w&#39;;</span><br><span class="line">			else</span><br><span class="line">				g[newx][newy]&#x3D;&#39;b&#39;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">bool check() &#x2F;&#x2F;检查是否全部同色 </span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	char f&#x3D;g[1][1];</span><br><span class="line">	for(i&#x3D;0;i&lt;4;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;0;j&lt;4;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(g[i][j]!&#x3D;f)</span><br><span class="line">				return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	for(i&#x3D;0;i&lt;4;i++)</span><br><span class="line">		cin&gt;&gt;g[i];</span><br><span class="line">	for(i&#x3D;0;i&lt;(1 &lt;&lt; 16);i++) &#x2F;&#x2F;枚举所有翻的情况 </span><br><span class="line">	&#123;</span><br><span class="line">		int step&#x3D;0; &#x2F;&#x2F;走了几步 </span><br><span class="line">		for(j&#x3D;0;j&lt;16;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i &amp; (1 &lt;&lt; j)) &#x2F;&#x2F;判断第j位为是否为1</span><br><span class="line">			&#123;</span><br><span class="line">				change(j);</span><br><span class="line">				step++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(check())</span><br><span class="line">			ans&#x3D;min(ans,step);</span><br><span class="line">		for(j&#x3D;0;j&lt;16;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i &amp; (1 &lt;&lt; j)) &#x2F;&#x2F;判断第j位为是否为1</span><br><span class="line">				change(j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if(ans&#x3D;&#x3D;200)</span><br><span class="line">		cout&lt;&lt;&quot;Impossible&quot;&lt;&lt;endl;</span><br><span class="line">	else</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Subsequence-UVA-1121"><a href="#Subsequence-UVA-1121" class="headerlink" title="Subsequence UVA-1121"></a>Subsequence <a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3562" target="_blank" rel="noopener">UVA-1121</a></h2><p>题意：给你n和S以及n个数,求最短的连续子序列的长度使得这个连续子序列的和大于等于S，无解输出0<br>题解：预处理前缀和sum[i]=前i个数的和，二分枚举最小符合条件的右端点，找出最小的答案，否则输出0</p>
+<p>二分代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路：</span><br><span class="line">二分，预处理前缀和sum[i]&#x3D;前i个数的和，二分枚举最小符合条件的右端点 </span><br><span class="line">*&#x2F;</span><br><span class="line">int n,s,a,sum[100050];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while(cin&gt;&gt;n&gt;&gt;s)</span><br><span class="line">	&#123;</span><br><span class="line">		int ans&#x3D;100010;</span><br><span class="line">		sum[0]&#x3D;0;</span><br><span class="line">		for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;a;</span><br><span class="line">			sum[i]&#x3D;sum[i-1]+a; &#x2F;&#x2F;前缀和 </span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int l&#x3D;i,r&#x3D;n,best&#x3D;0; &#x2F;&#x2F;二分右端点 </span><br><span class="line">			while(l&lt;&#x3D;r)</span><br><span class="line">			&#123;</span><br><span class="line">				int mid&#x3D;(l+r)&#x2F;2;</span><br><span class="line">				if(sum[mid]-sum[i-1]&gt;&#x3D;s)</span><br><span class="line">				&#123;</span><br><span class="line">					best&#x3D;mid;</span><br><span class="line">					r&#x3D;mid-1;</span><br><span class="line">				&#125;</span><br><span class="line">				else</span><br><span class="line">					l&#x3D;mid+1;</span><br><span class="line">			&#125;</span><br><span class="line">			if(best!&#x3D;0)</span><br><span class="line">				ans&#x3D;min(ans,best-i+1);</span><br><span class="line">		&#125;</span><br><span class="line">		if(ans&#x3D;&#x3D;100010)</span><br><span class="line">			cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;</span><br><span class="line">		else</span><br><span class="line">			cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;syntaxhighlight&gt;</span><br><span class="line">尺取法代码：</span><br><span class="line">&lt;syntaxhighlight lang&#x3D;&quot;C++&quot; line&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路：</span><br><span class="line">尺取法，可以发现第i+1个数最小符合条件的右端点一定大于第i个数最小符合条件的右端点，</span><br><span class="line">所以可以存储上一个数最小符合条件的右端点，从这个点开始枚举，复杂度O(n) </span><br><span class="line">*&#x2F;</span><br><span class="line">int n,s,a[100010];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	while(cin&gt;&gt;n&gt;&gt;s)</span><br><span class="line">	&#123;</span><br><span class="line">		int ans&#x3D;100010;</span><br><span class="line">		for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">			cin&gt;&gt;a[i];</span><br><span class="line">		int j&#x3D;0,sum&#x3D;0; </span><br><span class="line">		for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			while(j+1&lt;&#x3D;n &amp;&amp; sum&lt;s)</span><br><span class="line">			&#123;</span><br><span class="line">				sum+&#x3D;a[j+1];</span><br><span class="line">				j++;</span><br><span class="line">			&#125;</span><br><span class="line">			if(sum&gt;&#x3D;s)</span><br><span class="line">				ans&#x3D;min(ans,j-i+1);</span><br><span class="line">			sum-&#x3D;a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		if(ans&#x3D;&#x3D;100010)</span><br><span class="line">			cout&lt;&lt;&quot;0&quot;&lt;&lt;endl;</span><br><span class="line">		else</span><br><span class="line">			cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Xor-Sum-2-AtCoder-arc098-b"><a href="#Xor-Sum-2-AtCoder-arc098-b" class="headerlink" title="Xor Sum 2 AtCoder - arc098_b"></a>Xor Sum 2 <a href="https://vjudge.net/problem/AtCoder-arc098_b/origin" target="_blank" rel="noopener">AtCoder - arc098_b</a></h2><p>题意：求有多少区间的xor之和等于区间的数的和<br>题解：尺取法，可以发现第i+1个数最小符合条件的右端点一定大于第i个数最小符合条件的右端点，<br>所以可以存储上一个数最小符合条件的右端点，从这个点开始枚举<br>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路：</span><br><span class="line">尺取法，可以发现第i+1个数最小符合条件的右端点一定大于第i个数最小符合条件的右端点，</span><br><span class="line">所以可以存储上一个数最小符合条件的右端点，从这个点开始枚举 </span><br><span class="line">*&#x2F;</span><br><span class="line">long long a[300100];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	long long n,i;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	long long ans&#x3D;0;</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	long long j&#x3D;0,suma&#x3D;0,sumb&#x3D;0; </span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		while(j+1&lt;&#x3D;n &amp;&amp; (suma^a[j+1])&#x3D;&#x3D;sumb+a[j+1])</span><br><span class="line">		&#123;</span><br><span class="line">			suma^&#x3D;a[j+1];</span><br><span class="line">			sumb+&#x3D;a[j+1];</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">		ans+&#x3D;j-i+1; </span><br><span class="line">		suma^&#x3D;a[i];</span><br><span class="line">		sumb-&#x3D;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Maximum-Subsequence-CodeForces-888E"><a href="#Maximum-Subsequence-CodeForces-888E" class="headerlink" title="Maximum Subsequence CodeForces - 888E"></a>Maximum Subsequence <a href="https://vjudge.net/problem/CodeForces-888E/origin" target="_blank" rel="noopener">CodeForces - 888E</a></h2><p>题意：给你最多35个整数, 选出一个子集使得这个子集的和取余m最大,求最大的余数<br>题解：折半枚举，把数组分成两半，分成两半后，暴力枚举前一半的组合，保存在b[]，<br>进行排序，复杂度最多为2^18，枚举完后，再暴力枚举另一半的所有组合，在<br>前一半的组合里寻找一个数，使这个数与一个组合加起来模m最大（在b数组中<br>查找小于等于m-1-x的最大的数，如果不存在取最大的数）<br>问题变成了在有序数组中查找一个数，二分解决<br>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;*</span><br><span class="line">思路：</span><br><span class="line">折半枚举，把数组分成两半，分成两半后，暴力枚举前一半的组合，保存在b[]，</span><br><span class="line">进行排序，复杂度最多为2^18，枚举完后，再暴力枚举另一半的所有组合，在</span><br><span class="line">前一半的组合里寻找一个数，使这个数与一个组合加起来模m最大（在b数组中</span><br><span class="line">查找小于等于m-1-x的最大的数，如果不存在取最大的数）</span><br><span class="line">问题变成了在有序数组中查找一个数，二分解决 </span><br><span class="line">*&#x2F;</span><br><span class="line">int a[40],b[262200],temp&#x3D;0,n,m,i,j,ans&#x3D;0;</span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int l&#x3D;0,r&#x3D;temp-1;</span><br><span class="line">	while(l&lt;&#x3D;r)</span><br><span class="line">	&#123;</span><br><span class="line">		int mid&#x3D;(l+r)&#x2F;2;</span><br><span class="line">		if(b[mid]&gt;x)</span><br><span class="line">			r&#x3D;mid-1;</span><br><span class="line">		else</span><br><span class="line">			l&#x3D;mid+1;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">		a[i]%&#x3D;m;</span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;0;i&lt;(1&lt;&lt;(n&#x2F;2));i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int sum&#x3D;0;</span><br><span class="line">		for(j&#x3D;0;j&lt;n&#x2F;2;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i &amp; (1&lt;&lt;j))</span><br><span class="line">			&#123;</span><br><span class="line">				sum&#x3D;(sum+a[j])%m;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		b[temp++]&#x3D;sum;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(b,b+temp);</span><br><span class="line">	for(i&#x3D;0;i&lt;(1&lt;&lt;(n-(n&#x2F;2)));i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int sum&#x3D;0;</span><br><span class="line">		for(j&#x3D;0;j&lt;(n-(n&#x2F;2));j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i &amp; (1&lt;&lt;j))</span><br><span class="line">			&#123;</span><br><span class="line">				sum&#x3D;(sum+a[j+(n&#x2F;2)])%m;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		int x&#x3D;find(m-sum-1);</span><br><span class="line">		ans&#x3D;max(ans,(b[x]+sum)%m);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"> 	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/26/%E9%A2%98%E8%A7%A3hdu1232/" rel="next" title="题解hdu1232">
+                <i class="fa fa-chevron-left"></i> 题解hdu1232
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yangxiaqing</p>
+              <p class="site-description motion-element" itemprop="description">keep time keep mind keep humble</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flip-Game-poj-1753"><span class="nav-number">1.</span> <span class="nav-text">Flip Game poj-1753</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Subsequence-UVA-1121"><span class="nav-number">2.</span> <span class="nav-text">Subsequence UVA-1121</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xor-Sum-2-AtCoder-arc098-b"><span class="nav-number">3.</span> <span class="nav-text">Xor Sum 2 AtCoder - arc098_b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subsequence-CodeForces-888E"><span class="nav-number">4.</span> <span class="nav-text">Maximum Subsequence CodeForces - 888E</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yangxiaqing</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
