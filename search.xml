@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hello-world</title>
-    <url>/2020/07/25/hello-world/</url>
-    <content><![CDATA[<p>这是我的第一篇blog</p>
-<p>我的微信公众号是超级初中生，欢迎大家扫码关注</p>
-<p><img src="https://i.loli.net/2020/07/26/oFH45KU1E3L2Qfd.jpg" alt="微信公众号"></p>
-<p>我的头条号的名字也是超级初中生，欢迎大家关注</p>
-]]></content>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>bitset</title>
     <url>/2020/07/27/bitset/</url>
     <content><![CDATA[<p>bitset是c++中的一个stl</p>
@@ -50,6 +38,18 @@
       </categories>
       <tags>
         <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hello-world</title>
+    <url>/2020/07/25/hello-world/</url>
+    <content><![CDATA[<p>这是我的第一篇blog</p>
+<p>我的微信公众号是超级初中生，欢迎大家扫码关注</p>
+<p><img src="https://i.loli.net/2020/07/26/oFH45KU1E3L2Qfd.jpg" alt="微信公众号"></p>
+<p>我的头条号的名字也是超级初中生，欢迎大家关注</p>
+]]></content>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
