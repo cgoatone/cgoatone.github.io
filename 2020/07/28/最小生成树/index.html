@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="最小生成树," />
 
 
 
@@ -95,19 +95,20 @@
 
 
 
-<meta name="description" content="一、关于图的几个概念1.连通图：在无向图中，若任意两个顶点都有路径相通，则称该无向图为连通图。 2.强连通图：在有向图中，若任意两个顶点都有路径相通，则称该有向图为强连通图。 3.权在连通图中，若图的边具有一定的意义，每一条边都对应着一个价值，称为权 4.连通网：权代表着连接连个顶点的代价，称这种连通图叫做连通网。 5.生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，有且只有n">
+<meta name="description" content="一、关于图的几个概念1.连通图：在无向图中，若任意两个顶点都有路径相通，则称该无向图为连通图。 2.强连通图：在有向图中，若任意两个顶点都有路径相通，则称该有向图为强连通图。 3.权在连通图中，若图的边具有一定的意义，每一条边都对应着一个价值，称为权 4.连通网：权代表着连接连个顶点的代价，称这种连通图叫做连通网。 5.生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，有且只">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最小生成树">
 <meta property="og:url" content="http://cgoatone.js.org/2020/07/28/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
 <meta property="og:site_name" content="yangxiaqing&#39;s blog">
-<meta property="og:description" content="一、关于图的几个概念1.连通图：在无向图中，若任意两个顶点都有路径相通，则称该无向图为连通图。 2.强连通图：在有向图中，若任意两个顶点都有路径相通，则称该有向图为强连通图。 3.权在连通图中，若图的边具有一定的意义，每一条边都对应着一个价值，称为权 4.连通网：权代表着连接连个顶点的代价，称这种连通图叫做连通网。 5.生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，有且只有n">
+<meta property="og:description" content="一、关于图的几个概念1.连通图：在无向图中，若任意两个顶点都有路径相通，则称该无向图为连通图。 2.强连通图：在有向图中，若任意两个顶点都有路径相通，则称该有向图为强连通图。 3.权在连通图中，若图的边具有一定的意义，每一条边都对应着一个价值，称为权 4.连通网：权代表着连接连个顶点的代价，称这种连通图叫做连通网。 5.生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，有且只">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200204102709380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1NDY4Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200205090111710.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1NDY4Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020020509550321.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1NDY4Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200205094034394.gif">
 <meta property="article:published_time" content="2020-07-28T03:09:35.866Z">
-<meta property="article:modified_time" content="2020-07-28T03:11:16.700Z">
+<meta property="article:modified_time" content="2020-07-28T03:48:25.587Z">
 <meta property="article:author" content="yangxiaqing">
+<meta property="article:tag" content="最小生成树">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200204102709380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1NDY4Nw==,size_16,color_FFFFFF,t_70">
 
@@ -366,6 +367,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">信息学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -434,7 +457,9 @@
       
 
       
-        <h2 id="一、关于图的几个概念"><a href="#一、关于图的几个概念" class="headerlink" title="一、关于图的几个概念"></a>一、关于图的几个概念</h2><h4 id="1-连通图："><a href="#1-连通图：" class="headerlink" title="1.连通图："></a>1.连通图：</h4><p>在<strong>无向图</strong>中，若任意两个顶点都有路径相通，则称该无向图为连通图。</p>
+        <a id="more"></a>
+
+<h2 id="一、关于图的几个概念"><a href="#一、关于图的几个概念" class="headerlink" title="一、关于图的几个概念"></a>一、关于图的几个概念</h2><h4 id="1-连通图："><a href="#1-连通图：" class="headerlink" title="1.连通图："></a>1.连通图：</h4><p>在<strong>无向图</strong>中，若任意两个顶点都有路径相通，则称该无向图为连通图。</p>
 <h4 id="2-强连通图："><a href="#2-强连通图：" class="headerlink" title="2.强连通图："></a>2.强连通图：</h4><p>在<strong>有向图</strong>中，若任意两个顶点都有路径相通，则称该有向图为强连通图。</p>
 <h4 id="3-权"><a href="#3-权" class="headerlink" title="3.权"></a>3.权</h4><p>在连通图中，若图的边具有一定的意义，每一条边都对应着一个价值，称为权</p>
 <h4 id="4-连通网："><a href="#4-连通网：" class="headerlink" title="4.连通网："></a>4.连通网：</h4><p>权代表着连接连个顶点的代价，称这种连通图叫做连通网。</p>
@@ -495,6 +520,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 最小生成树</a>
+          
+        </div>
       
 
       
@@ -608,7 +639,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -619,7 +650,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
