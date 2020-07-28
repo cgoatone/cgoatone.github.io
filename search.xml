@@ -74,6 +74,18 @@
       </tags>
   </entry>
   <entry>
+    <title>行列式初步</title>
+    <url>/2020/07/28/%E8%A1%8C%E5%88%97%E5%BC%8F%E5%88%9D%E6%AD%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>信息学</category>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>行列式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hello-world</title>
     <url>/2020/07/25/hello-world/</url>
     <content><![CDATA[<p>这是我的第一篇blog</p>
@@ -88,15 +100,22 @@
       </tags>
   </entry>
   <entry>
-    <title>行列式初步</title>
-    <url>/2020/07/28/%E8%A1%8C%E5%88%97%E5%BC%8F%E5%88%9D%E6%AD%A5/</url>
-    <content><![CDATA[]]></content>
+    <title>使用位运算解决n皇后问题</title>
+    <url>/2020/07/26/%E4%BD%BF%E7%94%A8%E4%BD%8D%E8%BF%90%E7%AE%97%E8%A7%A3%E5%86%B3n%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击(皇后可以攻击在同一条斜线或直线上的皇后)</p>
+<a id="more"></a>
+
+<p>n皇后问题最常见的解决方法为dfs+回溯法，这里不过多阐述详细代码。我今天想要写的是一种利用位运算优化原本的方法，使得冲突的检测会更加简洁高效，从而更快的解决n皇后问题</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 16</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> MAX=(<span class="number">1</span>&lt;&lt;N)<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> row,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span> <span class="comment">//row表示列，left表示左对角线，right表示右对角线，为1是不能放的位置</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(row!=MAX) <span class="comment">//如果不是所有列都有皇后 </span></span><br><span class="line">	&#123;</span><br><span class="line">        <span class="keyword">int</span> pos=MAX&amp;~(row|ld|rd); <span class="comment">//pos表示可以放的位置</span></span><br><span class="line">        <span class="keyword">while</span>(pos!=<span class="number">0</span>) <span class="comment">//while循环枚举所有为1的位置，然后去放置皇后</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p=pos&amp;(-pos);<span class="comment">//lowbit操作，提取出最后一个1所在的位置</span></span><br><span class="line">            pos=pos^p; <span class="comment">//将p位置在pos中置为0</span></span><br><span class="line">            <span class="comment">//row|p把p二进制为1的位置放上皇后</span></span><br><span class="line">            <span class="comment">//(left|p)&lt;&lt;1更新left的下一行不能放的位置</span></span><br><span class="line">            <span class="comment">//(right|p)&gt;&gt;1更新right的下一行不能放的位置</span></span><br><span class="line">            f(row|p,(ld|p)&lt;&lt;<span class="number">1</span>,(rd|p)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="comment">//如果所有列都有皇后，则找到了一种可行的方法 </span></span><br><span class="line">		ans++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>); <span class="comment">//因为没有放皇后，所以所有都是0 </span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>信息学</category>
-        <category>数学</category>
       </categories>
       <tags>
-        <tag>行列式</tag>
+        <tag>位运算</tag>
+        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -127,25 +146,6 @@
       <tags>
         <tag>题解</tag>
         <tag>并查集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用位运算解决n皇后问题</title>
-    <url>/2020/07/26/%E4%BD%BF%E7%94%A8%E4%BD%8D%E8%BF%90%E7%AE%97%E8%A7%A3%E5%86%B3n%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击(皇后可以攻击在同一条斜线或直线上的皇后)</p>
-<a id="more"></a>
-
-<p>n皇后问题最常见的解决方法为dfs+回溯法，这里不过多阐述详细代码。我今天想要写的是一种利用位运算优化原本的方法，使得冲突的检测会更加简洁高效，从而更快的解决n皇后问题</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 16</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> MAX=(<span class="number">1</span>&lt;&lt;N)<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> row,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span> <span class="comment">//row表示列，left表示左对角线，right表示右对角线，为1是不能放的位置</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(row!=MAX) <span class="comment">//如果不是所有列都有皇后 </span></span><br><span class="line">	&#123;</span><br><span class="line">        <span class="keyword">int</span> pos=MAX&amp;~(row|ld|rd); <span class="comment">//pos表示可以放的位置</span></span><br><span class="line">        <span class="keyword">while</span>(pos!=<span class="number">0</span>) <span class="comment">//while循环枚举所有为1的位置，然后去放置皇后</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p=pos&amp;(-pos);<span class="comment">//lowbit操作，提取出最后一个1所在的位置</span></span><br><span class="line">            pos=pos^p; <span class="comment">//将p位置在pos中置为0</span></span><br><span class="line">            <span class="comment">//row|p把p二进制为1的位置放上皇后</span></span><br><span class="line">            <span class="comment">//(left|p)&lt;&lt;1更新left的下一行不能放的位置</span></span><br><span class="line">            <span class="comment">//(right|p)&gt;&gt;1更新right的下一行不能放的位置</span></span><br><span class="line">            f(row|p,(ld|p)&lt;&lt;<span class="number">1</span>,(rd|p)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="comment">//如果所有列都有皇后，则找到了一种可行的方法 </span></span><br><span class="line">		ans++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>); <span class="comment">//因为没有放皇后，所以所有都是0 </span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>信息学</category>
-      </categories>
-      <tags>
-        <tag>位运算</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
 </search>
