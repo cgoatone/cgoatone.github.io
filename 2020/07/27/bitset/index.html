@@ -455,35 +455,26 @@
       
         <p>bitset是c++中的一个stl</p>
 <a id="more"></a>
-
 <p>如果需要使用bitset，则需要在头文件中定义#include<bitset></p>
 <p>它是一种存储二进制字符串的结构，每一位只能为0或1，每一位只占用1bit</p>
 <p>我们通常可以这样构造</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;长度&gt; 名称;</span><br><span class="line"><span class="built_in">bitset</span>&lt;12&gt; a;</span><br></pre></td></tr></table></figure>
-
 <p>我们可以像操纵数组一样操纵bitset</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;12&gt; a;</span><br><span class="line"></span><br><span class="line">a[i]=<span class="number">1</span> <span class="comment">//给bitset的第i为赋值为1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a[i]; <span class="comment">//输入一个01字符串到bitset里</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出bitset的第i位</span></span><br></pre></td></tr></table></figure>
-
 <p>bitset自带有一些常用的二进制操纵符</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;12&gt; a,b;</span><br><span class="line"></span><br><span class="line">a^b <span class="comment">//异或 相同为0不同为1</span></span><br><span class="line">a&amp;b <span class="comment">//按位与 同1为1其余为0</span></span><br><span class="line">a|b <span class="comment">//按位或 有1为1其余为0</span></span><br><span class="line">a&lt;&lt;=<span class="number">2</span> <span class="comment">//左移2位并赋值</span></span><br><span class="line">a&gt;&gt;=<span class="number">2</span> <span class="comment">//右移2位并赋值</span></span><br><span class="line">a&lt;&lt;<span class="number">2</span> <span class="comment">//左移2位</span></span><br><span class="line">a&gt;&gt;<span class="number">2</span> <span class="comment">//右移2位</span></span><br><span class="line">~a <span class="comment">//按位取反</span></span><br><span class="line">a==b <span class="comment">//判断是否相等</span></span><br><span class="line">a!=b <span class="comment">//判断是否不相等</span></span><br></pre></td></tr></table></figure>
-
 <p>二进制还有一些经典的操作</p>
 <p>a为一个二进制字符串</p>
 <p>1.lowbit操作(找到最后一个1所在的位置)</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=a&amp;(-a) <span class="comment">//a就为最后一个1所在的位置</span></span><br></pre></td></tr></table></figure>
-
 <p>2.清零最低位的1</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=a&amp;(a<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
-
 <p>3.一个数异或偶数次还是原来的数</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=^(^a)</span><br></pre></td></tr></table></figure>
-
 <p>4.判断奇偶</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&amp;<span class="number">1</span>==<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <p>5.判断第i位是否为1</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a&gt;&gt;(i<span class="number">-1</span>))&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -1207,6 +1198,8 @@
   
 
   
+  
+
 
   
 

@@ -461,7 +461,6 @@
         <p>思路：分治</p>
 <p>实现方法：递归</p>
 <a id="more"></a>
-
 <h2 id="一、如何实现"><a href="#一、如何实现" class="headerlink" title="一、如何实现"></a>一、如何实现</h2><h3 id="1-每次从中间切一刀"><a href="#1-每次从中间切一刀" class="headerlink" title="1.每次从中间切一刀"></a>1.每次从中间切一刀</h3><h3 id="2-找出左边的最大子段"><a href="#2-找出左边的最大子段" class="headerlink" title="2.找出左边的最大子段"></a>2.找出左边的最大子段</h3><p>如图</p>
 <p><img src="https://cdn.luogu.com.cn/upload/pic/66227.png" alt=""></p>
 <p>递归蓝色区域</p>
@@ -473,8 +472,7 @@
 <h3 id="重点实现"><a href="#重点实现" class="headerlink" title="重点实现"></a>重点实现</h3><h4 id="1）如何实现"><a href="#1）如何实现" class="headerlink" title="1）如何实现"></a>1）如何实现</h4><p><img src="https://cdn.luogu.com.cn/upload/pic/66254.png" alt=""></p>
 <p>如图所示,蓝色区域等于红色区域加上绿色区域</p>
 <p>所以就可以先算出红色区域的最大子段在算出绿色区域的最大子段最后相加就行了</p>
-<h4 id="2）代码实现"><a href="#2）代码实现" class="headerlink" title="2）代码实现"></a>2）代码实现</h4><p>主要代码</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">long long i,<span class="attribute">left_sum</span>=0,l_max=a[mid],<span class="attribute">right_sum</span>=0,r_max=a[mid+1];</span><br><span class="line"><span class="keyword">for</span>(<span class="attribute">i</span>=mid;i&gt;=left;i--) </span><br><span class="line">&#123;</span><br><span class="line">	left_sum+=a[i];</span><br><span class="line">	<span class="keyword">if</span>(left_sum&gt;l_max)</span><br><span class="line">		<span class="attribute">l_max</span>=left_sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="attribute">i</span>=mid+1;i&lt;=right;i++)</span><br><span class="line">&#123;</span><br><span class="line">	right_sum+=a[i];</span><br><span class="line">	<span class="keyword">if</span>(right_sum&gt;r_max)</span><br><span class="line">		<span class="attribute">r_max</span>=right_sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2）代码实现"><a href="#2）代码实现" class="headerlink" title="2）代码实现"></a>2）代码实现</h4><p>主要代码<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">long long i,<span class="attribute">left_sum</span>=0,l_max=a[mid],<span class="attribute">right_sum</span>=0,r_max=a[mid+1];</span><br><span class="line"><span class="keyword">for</span>(<span class="attribute">i</span>=mid;i&gt;=left;i--) </span><br><span class="line">&#123;</span><br><span class="line">	left_sum+=a[i];</span><br><span class="line">	<span class="keyword">if</span>(left_sum&gt;l_max)</span><br><span class="line">		<span class="attribute">l_max</span>=left_sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="attribute">i</span>=mid+1;i&lt;=right;i++)</span><br><span class="line">&#123;</span><br><span class="line">	right_sum+=a[i];</span><br><span class="line">	<span class="keyword">if</span>(right_sum&gt;r_max)</span><br><span class="line">		<span class="attribute">r_max</span>=right_sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="二、注意事项"><a href="#二、注意事项" class="headerlink" title="二、注意事项"></a>二、注意事项</h2><h2 id="以下都是本人认为容易出错的地方"><a href="#以下都是本人认为容易出错的地方" class="headerlink" title="以下都是本人认为容易出错的地方"></a>以下都是本人认为容易出错的地方</h2><h3 id="1-long-long-的使用地方"><a href="#1-long-long-的使用地方" class="headerlink" title="1.long long 的使用地方"></a>1.long long 的使用地方</h3><p>在完整代码中,我命名变量通常都是long long类型的,这主要是因为不使用会爆掉,我们可以简单估一下：</p>
 <p>int范围：-2147483648 ~ +2147483647</p>
 <p>long long范围：-9223372036854775808 ~+9223372036854775807 </p>
@@ -1230,6 +1228,8 @@
   
 
   
+  
+
 
   
 
