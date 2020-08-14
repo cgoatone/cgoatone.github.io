@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="noip,题解," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这是我参加的第一场noip考试，却因为种种原因，变成了csp比赛，2020年又变回了noip。 T1 数字游戏题目描述小 K 同学向小 P 同学发送了一个长度为 8 的 01 字符串来玩数字游戏，小 P 同学想要知道字符串中究竟有多少个 1。 注意：01 字符串为每一个字符是 0 或者 1 的字符串，如“101”（不含双引号）为一个长度为 3 的 01 字符串。 输入格式输入文件只有一行，一个长度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="csp-j2019解题报告">
+<meta property="og:url" content="http://cgoatone.js.org/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/index.html">
+<meta property="og:site_name" content="yangxiaqing&#39;s blog">
+<meta property="og:description" content="这是我参加的第一场noip考试，却因为种种原因，变成了csp比赛，2020年又变回了noip。 T1 数字游戏题目描述小 K 同学向小 P 同学发送了一个长度为 8 的 01 字符串来玩数字游戏，小 P 同学想要知道字符串中究竟有多少个 1。 注意：01 字符串为每一个字符是 0 或者 1 的字符串，如“101”（不含双引号）为一个长度为 3 的 01 字符串。 输入格式输入文件只有一行，一个长度">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/5dbepjmh.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/tfom5z2s.png">
+<meta property="article:published_time" content="2020-08-14T07:41:37.723Z">
+<meta property="article:modified_time" content="2020-08-14T10:55:14.365Z">
+<meta property="article:author" content="yangxiaqing">
+<meta property="article:tag" content="noip">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/5dbepjmh.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":20,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cgoatone.js.org/2020/08/14/csp-j2019解题报告/"/>
+
+
+
+
+
+  <title>csp-j2019解题报告 | yangxiaqing's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yangxiaqing's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cgoatone.js.org/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yangxiaqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yangxiaqing's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">csp-j2019解题报告</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-14T15:41:37+08:00">
+                2020-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">信息学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是我参加的第一场noip考试，却因为种种原因，变成了csp比赛，2020年又变回了noip。</p>
+<h2 id="T1-数字游戏"><a href="#T1-数字游戏" class="headerlink" title="T1 数字游戏"></a>T1 数字游戏</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>小 K 同学向小 P 同学发送了一个长度为 8 的 <strong>01 字符串</strong>来玩数字游戏，小 P 同学想要知道字符串中究竟有多少个 1。</p>
+<p>注意：01 字符串为每一个字符是 0 或者 1 的字符串，如“101”（不含双引号）为一个长度为 3 的 01 字符串。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>输入文件只有一行，一个长度为 8 的 01 字符串 s。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出文件只有一行，包含一个整数，即 01 字符串中<strong>字符 1</strong> 的个数。</p>
+<h3 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><p><strong>输入 #1</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00010100</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #1</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>输入 #2</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11111111</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #2</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h3 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明/提示"></a>说明/提示</h3><p>【输入输出样例 1 说明】</p>
+<p>该 01 字符串中有 2 个字符 1。</p>
+<p>【输入输出样例 2 说明】</p>
+<p>该 01 字符串中有 8 个字符 1。</p>
+<p>【数据规模与约定】</p>
+<p>对于 20% 的数据，保证输入的字符全部为 0。</p>
+<p>对于 100% 的数据，输入只可能包含字符 0 和字符 1，字符串长度固定为 8。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>签到题，可以使用字符串相关知识解决</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//freopen("number.in","r",stdin);</span></span><br><span class="line">	<span class="comment">//freopen("number.out","w",stdout);</span></span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;s;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.size();i++)</span><br><span class="line">		<span class="keyword">if</span>(s[i]==<span class="string">'1'</span>)</span><br><span class="line">			ans++;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="T2-公交换乘"><a href="#T2-公交换乘" class="headerlink" title="T2 公交换乘"></a>T2 公交换乘</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>著名旅游城市 B 市为了鼓励大家采用公共交通方式出行，推出了一种地铁换乘公交车的优惠方案：</p>
+<ol>
+<li>在搭乘一次地铁后可以获得一张优惠票，有效期为 45 分钟，在有效期内可以消耗这张优惠票，免费搭乘一次票价不超过地铁票价的公交车。在有效期内指开始乘公交车的时间与开始乘地铁的时间之差小于等于 45 分钟，即：<script type="math/tex">t_{bus} - t_{subway} \leq 45</script></li>
+<li>搭乘地铁获得的优惠票可以累积，即可以连续搭乘若干次地铁后再连续使用优惠票搭乘公交车。</li>
+<li>搭乘公交车时，如果可以使用优惠票一定会使用优惠票；如果有多张优惠票满足条件，则优先消耗获得最早的优惠票。</li>
+</ol>
+<p>现在你得到了小轩最近的公共交通出行记录，你能帮他算算他的花费吗?</p>
+<h3 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h3><p>输入文件的第一行包含一个正整数 n，代表乘车记录的数量。</p>
+<p>接下来的 n 行，每行包含 3 个整数，相邻两数之间以一个空格分隔。第 i 行的第 1 个整数代表第 i 条记录乘坐的交通工具，0 代表地铁，1 代表公交车；第 2 个整数代表第 i 条记录乘车的票价 <script type="math/tex">price_i</script> ；第三个整数代表第 i<em>i</em> 条记录开始乘车的时间 <script type="math/tex">t_i</script>（距 0 时刻的分钟数）。</p>
+<p>我们保证出行记录是按照开始乘车的时间顺序给出的，且不会有两次乘车记录出现在同一分钟。</p>
+<h3 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出文件有一行，包含一个正整数，代表小轩出行的总花费。</p>
+<h3 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><p><strong>输入 #1</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">10</span> <span class="number">3</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">5</span> <span class="number">46</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">12</span> <span class="number">50</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">3</span> <span class="number">96</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">5</span> <span class="number">110</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">6</span> <span class="number">135</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #1</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">36</span></span><br></pre></td></tr></table></figure>
+<p><strong>输入 #2</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">5</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">20</span> <span class="number">16</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">7</span> <span class="number">23</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">18</span> <span class="number">31</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">4</span> <span class="number">38</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">7</span> <span class="number">68</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #2</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">32</span></span><br></pre></td></tr></table></figure>
+<h3 id="说明-提示-1"><a href="#说明-提示-1" class="headerlink" title="说明/提示"></a>说明/提示</h3><p>【输入输出样例 1 说明】</p>
+<p>第一条记录，在第 3 分钟花费 10 元乘坐地铁。</p>
+<p>第二条记录，在第 46 分钟乘坐公交车，可以使用第一条记录中乘坐地铁获得的优惠票，因此没有花费。</p>
+<p>第三条记录，在第 50 分种花费 12 元乘坐地铁。</p>
+<p>第四条记录，在第 96 分钟乘坐公交车，由于距离第三条记录中乘坐地铁已超过 45 分钟，所以优惠票已失效，花费 3 元乘坐公交车。</p>
+<p>第五条记录，在第 110 分钟花费 5 元乘坐地铁。</p>
+<p>第六条记录，在第 135 分钟乘坐公交车，由于此时手中只有第五条记录中乘坐地铁获得的优惠票有效，而本次公交车的票价为 6 元，高于第五条记录中地铁的票价 5 元，所以不能使用优惠票，花费 6 元乘坐公交车。</p>
+<p>总共花费 36 元。</p>
+<p>【输入输出样例 2 说明】</p>
+<p>第一条记录，在第 1 分钟花费 5 元乘坐地铁。</p>
+<p>第二条记录，在第 16 分钟花费 20 元乘坐地铁。</p>
+<p>第三条记录，在第 23 分钟花费 7 元乘坐地铁。</p>
+<p>第四条记录，在第 31 分钟乘坐公交车，此时只有第二条记录中乘坐的地铁票价高于本次公交车票价，所以使用第二条记录中乘坐地铁获得的优惠票。</p>
+<p>第五条记录，在第 38 分钟乘坐公交车，此时第一条和第三条记录中乘坐地铁获得的优惠票都可以使用，使用获得最早的优惠票，即第一条记录中乘坐地铁获得的优惠票。</p>
+<p>第六条记录，在第 68 分钟乘坐公交车，使用第三条记录中乘坐地铁获得的优惠票。</p>
+<p>总共花费 32 元。</p>
+<p>【数据规模与约定】</p>
+<p>对于 30% 的数据，<script type="math/tex">n \leq 1000，t_i \leq 10^6</script>。</p>
+<p>另有 15% 的数据，<script type="math/tex">t_i \leq 10^7，price_i</script> 都相等。</p>
+<p>另有 15% 的数据，<script type="math/tex">t_i \leq 10^9，price_i</script> 都相等。</p>
+<p>对于 100% 的数据，<script type="math/tex">n \leq 10^5，t_i \leq 10^9，1 \leq price_i \leq 1000</script>。</p>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>队列+模拟</p>
+<p>每次把first移到没超时的地铁票那里</p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> price,t;</span><br><span class="line">	<span class="keyword">bool</span> flag;</span><br><span class="line">&#125;q[<span class="number">100010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//freopen("transfer.in","r",stdin);</span></span><br><span class="line">	<span class="comment">//freopen("transfer.out","w",stdout);</span></span><br><span class="line">	<span class="keyword">int</span> n,ans=<span class="number">0</span>,first=<span class="number">0</span>,last=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">bool</span> flag;</span><br><span class="line">		<span class="keyword">int</span> price,t;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;flag&gt;&gt;price&gt;&gt;t;</span><br><span class="line">		<span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			ans+=price;</span><br><span class="line">			q[last].price=price;</span><br><span class="line">			q[last].t=t+<span class="number">45</span>;</span><br><span class="line">			q[last].flag=<span class="number">0</span>;</span><br><span class="line">			last++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(q[first].t&lt;t &amp;&amp; first&lt;last)</span><br><span class="line">				first++;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=first;j&lt;last;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(q[j].price&gt;=price &amp;&amp; q[j].flag==<span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					q[j].flag=<span class="number">1</span>;</span><br><span class="line">					ans-=price;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ans+=price;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="T3-纪念品"><a href="#T3-纪念品" class="headerlink" title="T3 纪念品"></a>T3 纪念品</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>小伟突然获得一种超能力，他知道未来 T 天 N 种纪念品每天的价格。某个纪念品的价格是指购买一个该纪念品所需的金币数量，以及卖出一个该纪念品换回的金币数量。</p>
+<p>每天，小伟可以进行以下两种交易<strong>无限次</strong>：</p>
+<ol>
+<li>任选一个纪念品，若手上有足够金币，以当日价格购买该纪念品；</li>
+<li>卖出持有的任意一个纪念品，以当日价格换回金币。</li>
+</ol>
+<p>每天卖出纪念品换回的金币可以<strong>立即</strong>用于购买纪念品，当日购买的纪念品也可以<strong>当日卖出</strong>换回金币。当然，一直持有纪念品也是可以的。</p>
+<p>T 天之后，小伟的超能力消失。因此他一定会在第 T 天卖出<strong>所有</strong>纪念品换回金币。</p>
+<p>小伟现在有 M 枚金币，他想要在超能力消失后拥有尽可能多的金币。</p>
+<h3 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行包含三个正整数 T, N, M，相邻两数之间以一个空格分开，分别代表未来天数 T，纪念品数量 N，小伟现在拥有的金币数量 M。</p>
+<p>接下来 T行，每行包含 N个正整数，相邻两数之间以一个空格分隔。第 i 行的 N 个正整数分别为 <script type="math/tex">P，P_{i,2},……,P_{i,N}</script>，其中 <script type="math/tex">P_{i,j}</script> 表示第 i 天第 j 种纪念品的价格。</p>
+<h3 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出仅一行，包含一个正整数，表示小伟在超能力消失后最多能拥有的金币数量。</p>
+<h3 id="输入输出样例-2"><a href="#输入输出样例-2" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><p><strong>输入 #1</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">6 </span><span class="number">1</span> <span class="number">100</span></span><br><span class="line"><span class="number">50</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="number">25</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="number">25</span></span><br><span class="line"><span class="number">50</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #1</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">305</span></span><br></pre></td></tr></table></figure>
+<p><strong>输入 #2</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span><span class="number">3</span> <span class="number">100</span></span><br><span class="line"><span class="symbol">10 </span><span class="number">20</span> <span class="number">15</span></span><br><span class="line"><span class="symbol">15 </span><span class="number">17</span> <span class="number">13</span></span><br><span class="line"><span class="symbol">15 </span><span class="number">25</span> <span class="number">16</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #2</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">217</span></span><br></pre></td></tr></table></figure>
+<h3 id="说明-提示-2"><a href="#说明-提示-2" class="headerlink" title="说明/提示"></a>说明/提示</h3><p>【输入输出样例 1 说明】</p>
+<p>最佳策略是：</p>
+<p>第二天花光所有 100 枚金币买入 5 个纪念品 1；</p>
+<p>第三天卖出 5 个纪念品 1，获得金币 125 枚；</p>
+<p>第四天买入 6 个纪念品 1，剩余 5 枚金币；</p>
+<p>第六天必须卖出所有纪念品换回 300 枚金币，第四天剩余 5 枚金币,共 305 枚金币。</p>
+<p>超能力消失后，小伟最多拥有 305 枚金币。</p>
+<p>【输入输出样例 2 说明】</p>
+<p>最佳策略是：</p>
+<p>第一天花光所有金币买入 10 个纪念品 1；</p>
+<p>第二天卖出全部纪念品 1 得到 150 枚金币并买入 8 个纪念品 2 和 1 个纪念品 3，剩余 1 枚金币；</p>
+<p>第三天必须卖出所有纪念品换回216 枚金币，第二天剩余1枚金币，共 217 枚金币。</p>
+<p>超能力消失后，小伟最多拥有 217 枚金币。</p>
+<p>【数据规模与约定】</p>
+<p>对于 10% 的数据，<script type="math/tex">T = 1</script>。</p>
+<p>对于 30% 的数据，<script type="math/tex">T \leq 4, N \leq 4, M \leq 100</script>，所有价格 <script type="math/tex">10 \leq P_{i,j} \leq 100</script>。</p>
+<p>另有 15% 的数据，<script type="math/tex">T \leq 100, N = 1</script>。</p>
+<p>另有 15% 的数据，<script type="math/tex">T = 2, N \leq 100</script>。</p>
+<p>对于 100% 的数据，<script type="math/tex">T \leq 100, N \leq 100, M \leq 10^3</script>，所有价格 <script type="math/tex">1 \leq P_{i,j} \leq 10^4</script>，数据保证任意时刻，小明手上的金币数不可能超过 <script type="math/tex">10^4</script>。</p>
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>可以看出来这是一个动态规划的问题，我们可以用dp[i] [j]代表在第i天时有j块钱时第二天最多可以得多少钱，但是可以压缩掉天数的一维</p>
+<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">110</span>][<span class="number">110</span>],dp[<span class="number">10010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//freopen("souvenir.in","r",stdin);</span></span><br><span class="line">	<span class="comment">//freopen("souvenir.out","w",stdout);</span></span><br><span class="line">	<span class="keyword">int</span> t,n,m;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;p[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">10000</span>;j++)</span><br><span class="line">			dp[j]=<span class="number">-10010</span>;</span><br><span class="line">		dp[m]=m; </span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=m;k&gt;=p[i][j];k--)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[k-p[i][j]]=max(dp[k-p[i][j]],dp[k]+p[i+<span class="number">1</span>][j]-p[i][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> maxm=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)</span><br><span class="line">			maxm=max(maxm,dp[j]);</span><br><span class="line">		m=maxm;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;m&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="T4-加工零件"><a href="#T4-加工零件" class="headerlink" title="T4 加工零件"></a>T4 加工零件</h2><h2 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h2><p>凯凯的工厂正在有条不紊地生产一种神奇的零件，神奇的零件的生产过程自然也很神奇。工厂里有 n 位工人，工人们从 <script type="math/tex">1 \sim n</script> 编号。某些工人之间存在双向的零件传送带。保证每两名工人之间最多只存在一条传送带。</p>
+<p>如果 x 号工人想生产一个被加工到第 <script type="math/tex">L (L \gt 1)</script> 阶段的零件，则<strong>所有</strong>与 x 号工人有传送带<strong>直接</strong>相连的工人，都需要生产一个被加工到第 L - 1 阶段的零件（但 x 号工人自己<strong>无需</strong>生产第 L - 1 阶段的零件）。</p>
+<p>如果 x 号工人想生产一个被加工到第 1 阶段的零件，则<strong>所有</strong>与 x 号工人有传送带<strong>直接</strong>相连的工人，都需要为 x 号工人提供一个原材料。</p>
+<p>轩轩是 1 号工人。现在给出 q 张工单，第 i 张工单表示编号为 <script type="math/tex">a_i</script> 的工人想生产一个第 <script type="math/tex">L_i</script> 阶段的零件。轩轩想知道对于每张工单，他是否需要给别人提供原材料。他知道聪明的你一定可以帮他计算出来！</p>
+<h2 id="输入格式-3"><a href="#输入格式-3" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行三个正整数 n，m 和 q，分别表示工人的数目、传送带的数目和工单的数目。</p>
+<p>接下来 m 行，每行两个正整数 u 和 v，表示编号为 u 和 v 的工人之间存在一条零件传输带。保证 <script type="math/tex">u \neq v</script>。</p>
+<p>接下来 q 行，每行两个正整数 a 和 L，表示编号为 a 的工人想生产一个第 L 阶段的零件。</p>
+<h2 id="输出格式-3"><a href="#输出格式-3" class="headerlink" title="输出格式"></a>输出格式</h2><p>共 q 行，每行一个字符串 <code>Yes</code> 或者 <code>No</code>。如果按照第 i 张工单生产，需要编号为 1 的轩轩提供原材料，则在第 i 行输出 <code>Yes</code>；否则在第 i 行输出 <code>No</code>。注意输出<strong>不含</strong>引号。</p>
+<h2 id="输入输出样例-3"><a href="#输入输出样例-3" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><p><strong>输入 #1</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">3 </span><span class="number">2</span> <span class="number">6</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">2 </span><span class="number">3</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">1</span></span><br><span class="line"><span class="symbol">2 </span><span class="number">1</span></span><br><span class="line"><span class="symbol">3 </span><span class="number">1</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">2 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">3 </span><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #1</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">No</span></span><br><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">No</span></span><br><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">No</span></span><br><span class="line"><span class="literal">Yes</span></span><br></pre></td></tr></table></figure>
+<p><strong>输入 #2</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">5 </span><span class="number">5</span> <span class="number">5</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">2 </span><span class="number">3</span></span><br><span class="line"><span class="symbol">3 </span><span class="number">4</span></span><br><span class="line"><span class="symbol">4 </span><span class="number">5</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">5</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">1</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">3</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">4</span></span><br><span class="line"><span class="symbol">1 </span><span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出 #2</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">No</span></span><br><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">No</span></span><br><span class="line"><span class="literal">Yes</span></span><br><span class="line"><span class="literal">Yes</span></span><br></pre></td></tr></table></figure>
+<h2 id="说明-提示-3"><a href="#说明-提示-3" class="headerlink" title="说明/提示"></a>说明/提示</h2><p>【输入输出样例 1 说明】</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/5dbepjmh.png" alt="img"></p>
+<p>编号为 1 的工人想生产第 1 阶段的零件，需要编号为 2 的工人提供原材料。</p>
+<p>编号为 2 的工人想生产第 1 阶段的零件，需要编号为 1 和 3 的工人提供原材料。</p>
+<p>编号为 3 的工人想生产第 1 阶段的零件，需要编号为 2 的工人提供原材料。</p>
+<p>编号为 1 的工人想生产第 2 阶段的零件，需要编号为 2 的工人生产第 1 阶段的零 件，需要编号为 1 和 3 的工人提供原材料。</p>
+<p>编号为 2 的工人想生产第 2 阶段的零件，需要编号为 1 和 3 的工人生产第 1 阶段的零件，他/她们都需要编号为 2 的工人提供原材料。</p>
+<p>编号为 3 的工人想生产第 2 阶段的零件，需要编号为 2 的工人生产第 1 阶段的零件，需要编号为 1 和 3 的工人提供原材料。</p>
+<p>【输入输出样例 2 说明】</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tfom5z2s.png" alt="img"></p>
+<p>编号为 1 的工人想生产第 1 阶段的零件，需要编号为 2 和 5 的工人提供原材料。</p>
+<p>编号为 1 的工人想生产第 2 阶段的零件，需要编号为 2 和 5 的工人生产第 1 阶段的零件，需要编号为 1,3,4 的工人提供原材料。</p>
+<p>编号为 1 的工人想生产第 3 阶段的零件，需要编号为 2 和 5 的工人生产第 2 阶段的零件，需要编号为 1,3,4 的工人生产第 1 阶段的零件，需要编号为 2,3,4,5 的工人提供原材料。</p>
+<p>编号为 1 的工人想生产第 4 阶段的零件，需要编号为 2 和 5 的工人生产第 3 阶段的零件，需要编号为 1,3,4 的工人生产第 2 阶段的零件，需要编号为 2,3,4,5 的工人生产第 1 阶段的零件，需要全部工人提供原材料。</p>
+<p>编号为 1 的工人想生产第 5 阶段的零件，需要编号为 2 和 5 的工人生产第 4 阶段的零件，需要编号为 1,3,4 的工人生产第 3 阶段的零件，需要编号为 2,3,4,5 的工人生产第 2 阶段的零件，需要全部工人生产第 1 阶段的零件，需要全部工人提供原材料。</p>
+<p>【数据规模与约定】</p>
+<p>共 20 个测试点。</p>
+<p><script type="math/tex">1 \leq u, v, a \leq n</script>。</p>
+<p>测试点 1~4，<script type="math/tex">1 \leq n, m \leq 1000，q = 3</script>。</p>
+<p>测试点 5~8，<script type="math/tex">1 \leq n, m \leq 1000，q = 3，1 \leq L \leq 10</script>。</p>
+<p>测试点 9~12，<script type="math/tex">1 \leq n, m, L \leq 1000，1 \leq q \leq 100</script>。</p>
+<p>测试点 13~16，<script type="math/tex">1 \leq n, m, L \leq 1000，1 \leq q \leq 10^5</script>。</p>
+<p>测试点 17~20，<script type="math/tex">1 \leq n, m, q \leq 10^5，1 \leq L \leq 10^9</script>。</p>
+<h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><p>可以发现这道题的本质时求一遍奇数最短路径和偶数最短路径</p>
+<h3 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to;</span><br><span class="line">	<span class="keyword">int</span> next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num,dis;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> node &amp;a)<span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> a.dis&lt;dis;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> n,m,q,head[N],cnt,w[N][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[N][<span class="number">2</span>];</span><br><span class="line">priority_queue&lt;node&gt; pq;</span><br><span class="line">edge e[N];</span><br><span class="line">node qtemp;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cnt++;</span><br><span class="line">	e[cnt].to=v;</span><br><span class="line">	e[cnt].next=head[u];</span><br><span class="line">	head[u]=cnt; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!pq.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i;</span><br><span class="line">		qtemp=pq.top();</span><br><span class="line">		pq.pop();</span><br><span class="line">		<span class="keyword">int</span> now=qtemp.num;</span><br><span class="line">		i=head[now];</span><br><span class="line">		<span class="keyword">while</span>(i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> tempto=e[i].to;</span><br><span class="line">			<span class="keyword">if</span>(w[tempto][<span class="number">0</span>]&gt;w[now][<span class="number">1</span>]+<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				w[tempto][<span class="number">0</span>]=w[now][<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span>(!vis[tempto][<span class="number">0</span>])</span><br><span class="line">				&#123;</span><br><span class="line">					vis[tempto][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">					qtemp.num=tempto;</span><br><span class="line">					qtemp.dis=w[tempto][<span class="number">0</span>];</span><br><span class="line">					pq.push(qtemp);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(w[tempto][<span class="number">1</span>]&gt;w[now][<span class="number">0</span>]+<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				w[tempto][<span class="number">1</span>]=w[now][<span class="number">0</span>]+<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span>(!vis[tempto][<span class="number">1</span>])</span><br><span class="line">				&#123;</span><br><span class="line">					vis[tempto][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">					qtemp.num=tempto;</span><br><span class="line">					qtemp.dis=w[tempto][<span class="number">1</span>];</span><br><span class="line">					pq.push(qtemp);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			i=e[i].next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//freopen("work.in","r",stdin);</span></span><br><span class="line">	<span class="comment">//freopen("work.out","w",stdout);</span></span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;q;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		add_edge(u,v);</span><br><span class="line">		add_edge(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		w[i][<span class="number">0</span>]=<span class="number">2000000</span>;</span><br><span class="line">		w[i][<span class="number">1</span>]=<span class="number">2000000</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	w[<span class="number">1</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	qtemp.num=<span class="number">1</span>;</span><br><span class="line">	qtemp.dis=<span class="number">0</span>;</span><br><span class="line">	pq.push(qtemp);</span><br><span class="line">	dijkstra();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a,l;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;l;</span><br><span class="line">		<span class="keyword">if</span>(!head[<span class="number">1</span>])</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"No"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(w[a][l%<span class="number">2</span>]&lt;=l)</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"Yes"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"No"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    yangxiaqing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cgoatone.js.org/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="csp-j2019解题报告">http://cgoatone.js.org/2020/08/14/csp-j2019%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/noip/" rel="tag"><i class="fa fa-tag"></i> noip</a>
+          
+            <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"><i class="fa fa-tag"></i> 题解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/08/%5B%E8%BD%AC%E8%BD%BD%5D%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F%E9%85%8D%E5%B9%B3%E7%9A%84%E5%87%A0%E4%B8%AA%E6%96%B9%E6%B3%95/" rel="next" title="[转载]化学方程式配平的几个方法">
+                <i class="fa fa-chevron-left"></i> [转载]化学方程式配平的几个方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yangxiaqing</p>
+              <p class="site-description motion-element" itemprop="description">keep time keep mind keep humble</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1-数字游戏"><span class="nav-number">1.</span> <span class="nav-text">T1 数字游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出样例"><span class="nav-number">1.4.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明-提示"><span class="nav-number">1.5.</span> <span class="nav-text">说明&#x2F;提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.6.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">1.7.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2-公交换乘"><span class="nav-number">2.</span> <span class="nav-text">T2 公交换乘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式-1"><span class="nav-number">2.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式-1"><span class="nav-number">2.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出样例-1"><span class="nav-number">2.4.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明-提示-1"><span class="nav-number">2.5.</span> <span class="nav-text">说明&#x2F;提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-1"><span class="nav-number">2.6.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-1"><span class="nav-number">2.7.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3-纪念品"><span class="nav-number">3.</span> <span class="nav-text">T3 纪念品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式-2"><span class="nav-number">3.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式-2"><span class="nav-number">3.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出样例-2"><span class="nav-number">3.4.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明-提示-2"><span class="nav-number">3.5.</span> <span class="nav-text">说明&#x2F;提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-2"><span class="nav-number">3.6.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-2"><span class="nav-number">3.7.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4-加工零件"><span class="nav-number">4.</span> <span class="nav-text">T4 加工零件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述-3"><span class="nav-number">5.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式-3"><span class="nav-number">6.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式-3"><span class="nav-number">7.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出样例-3"><span class="nav-number">8.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明-提示-3"><span class="nav-number">9.</span> <span class="nav-text">说明&#x2F;提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-3"><span class="nav-number">9.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-3"><span class="nav-number">9.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yangxiaqing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站总访问量<span id="busuanzi_value_site_uv"></span>次
+</span>
+</div>
+  <!-- <div class="powered-by">由 <a class="theme-link" href="http://hexo.io" target="_blank" rel="external nofollow noopener">Hexo</a> 强力驱动</div>
+-->
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '0S1AcO6p6PtcMnsYfJViFrqv-gzGzoHsz',
+        appKey: 'PnmRVxzas3m3nYw8Q2rpaP16',
+        placeholder: '有什么想法,来发一条评论吧',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
